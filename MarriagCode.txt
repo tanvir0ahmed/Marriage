@@ -1,0 +1,38 @@
+Tanvir Ahmed
+Marriage Status
+(if Age is under 24 then Unmarried which is 0 and rest of all Married which is 1)
+================================================
+import pandas as pd
+from sklearn import tree
+import pydotplus
+from sklearn.tree import DecisionTreeClassifier
+import matplotlib.pyplot as plt
+import matplotlib.image as pltimg
+===============================================
+from google.colab import files 
+uploaded = files.upload()
+===============================================
+df = pd.read_csv("Dataset (2).csv")
+print(df)
+===============================================
+features = ['ID', 'Gender', 'Age']
+
+x = df[features]
+y = df['Status']
+
+print(x)
+print(y)
+==============================================
+dtree = DecisionTreeClassifier()
+dtree = dtree.fit(x, y)
+data = tree.export_graphviz(dtree, out_file=None, feature_names=features)
+graph = pydotplus.graph_from_dot_data(data)
+graph.write_png('mydecisiontree.png')
+
+img=pltimg.imread('mydecisiontree.png')
+imgplot = plt.imshow(img)
+plt.show()
+
+
+
+
